@@ -12,17 +12,23 @@ const startTasks = async () => {
     process.exit(0)
   }
 
-  for (const i in config.supportedChains) {
-    console.log(`Running price-updater on ${config.supportedChains[i]}, ${i}`)
+  if (!process.env.CHAIN_ENV) {
+    console.log('Please set the CHAIN_ENV in .env')
+    process.exit(0)
+  }
+
+  for (const i in config.supportedChains[process.env.CHAIN_ENV]) {
+    const chain = config.supportedChains[process.env.CHAIN_ENV][i]
+    console.log(`Running price-updater on ${chain}, ${i}`)
     const {
       duration,
       task
     } = require('./src/tasks/partner-updater')
 
-    await task(config.supportedChains[i])
+    await task(chain)
 
     setInterval(async () => {
-      await task(config.supportedChains[i])
+      await task(chain)
     }, duration * 1000)
   }
 }

@@ -1,11 +1,16 @@
 {
-    "supportedChains": [
-        "BSC",
-        "HECO",
-        "OEC",
-        "POLYGON",
-        "AVAX"
-    ],
+    "supportedChains": {
+        "mainnet": [ 
+            "BSC",
+            "HECO",
+            "OEC",
+            "POLYGON",
+            "AVAX"
+        ],
+        "testnet": [
+            "BSC"
+        ]
+    },
     "chains": {
         "mainnet": {
             "BSC": {
@@ -76,6 +81,25 @@
                     "http://23.88.68.45/node/avax"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0x5B1cCb62D2F9c8523abBa89A56432005cef03b99"
+            }
+        },
+        "testnet": {
+            "BSC": {
+                "ENABLED": true,
+                "NAME": "BSC Testnet",
+                "NETWORK_ID": "97",
+                "COINGECKO_ID": "binance-smart-chain",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "5.3",
+                "RPCURLS": [
+                    "https://data-seed-prebsc-1-s1.binance.org:8545/",
+                    "https://data-seed-prebsc-2-s1.binance.org:8545/",
+                    "https://data-seed-prebsc-1-s2.binance.org:8545/",
+                    "https://data-seed-prebsc-2-s2.binance.org:8545/",
+                    "https://data-seed-prebsc-1-s3.binance.org:8545/",
+                    "https://data-seed-prebsc-2-s3.binance.org:8545/"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0xe676452f2C650F80C3D282E723112aA67bE617c7"
             }
         }
     }

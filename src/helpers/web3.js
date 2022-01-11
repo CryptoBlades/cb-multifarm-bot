@@ -8,7 +8,6 @@ const {
 const config = require('../app-config.json')
 
 const helpers = {
-  env: 'mainnet',
   getNodes: (chain) => config.chains[helpers.env][chain].RPCURLS,
   getRandomNode: (chain) => {
     return helpers.getNodes()[Math.floor(Math.random() * (helpers.getNodes(chain).length - 0 + 1))]
