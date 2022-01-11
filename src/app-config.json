@@ -23,8 +23,7 @@
                 "RPCURLS": [
                     "https://bsc-dataseed.binance.org/",
                     "https://bsc-dataseed1.defibit.io/",
-                    "https://bsc-dataseed1.ninicoin.io/",
-                    "http://23.88.68.45/node/bsc"
+                    "https://bsc-dataseed1.ninicoin.io/"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0x812Fa2f7d89e5d837450702bd51120920dccaA99"
             },
@@ -36,8 +35,7 @@
                 "GAS_LIMIT": "500000",
                 "GAS_PRICE": "3",
                 "RPCURLS": [
-                    "https://http-mainnet.hecochain.com",
-                    "http://23.88.68.45/node/heco"
+                    "https://http-mainnet.hecochain.com"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0x7843Bd2aDdE5E54bD6e61C28fA89009240a48C08"
             },
@@ -50,8 +48,7 @@
                 "GAS_PRICE": "0.3",
                 "RPCURLS": [
                     "https://exchainrpc.okex.org",
-                    "https://pub001.hg.network/rpc",
-                    "http://23.88.68.45/node/oec"
+                    "https://pub001.hg.network/rpc"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0xcBEfF02841370997054AdfF624dC490C8cB20406"
             },
@@ -63,9 +60,7 @@
                 "GAS_LIMIT": "500000",
                 "GAS_PRICE": "46",
                 "RPCURLS": [
-                    "https://polygon-rpc.com/",
-                    "https://speedy-nodes-nyc.moralis.io/9d87192d6452780ef2889cb8/polygon/mainnet",
-                    "http://23.88.68.45/node/poly"
+                    "https://polygon-rpc.com/"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0x216AC39765D920D7f86162Daf9BE1f045f321A8D"
             },
@@ -77,8 +72,7 @@
                 "GAS_LIMIT": "500000",
                 "GAS_PRICE": "30",
                 "RPCURLS": [
-                    "https://api.avax.network/ext/bc/C/rpc",
-                    "http://23.88.68.45/node/avax"
+                    "https://api.avax.network/ext/bc/C/rpc"
                 ],
                 "TREASURY_CONTRACT_ADDRESS": "0x5B1cCb62D2F9c8523abBa89A56432005cef03b99"
             }
