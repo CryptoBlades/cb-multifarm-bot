@@ -1,0 +1,82 @@
+{
+    "supportedChains": [
+        "BSC",
+        "HECO",
+        "OEC",
+        "POLYGON",
+        "AVAX"
+    ],
+    "chains": {
+        "mainnet": {
+            "BSC": {
+                "ENABLED": true,
+                "NAME": "BSC",
+                "NETWORK_ID": "56",
+                "COINGECKO_ID": "binance-smart-chain",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "5.3",
+                "RPCURLS": [
+                    "https://bsc-dataseed.binance.org/",
+                    "https://bsc-dataseed1.defibit.io/",
+                    "https://bsc-dataseed1.ninicoin.io/",
+                    "http://23.88.68.45/node/bsc"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0x812Fa2f7d89e5d837450702bd51120920dccaA99"
+            },
+            "HECO": {
+                "ENABLED": true,
+                "NAME": "HECO",
+                "NETWORK_ID": "128",
+                "COINGECKO_ID": "huobi-token",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "3",
+                "RPCURLS": [
+                    "https://http-mainnet.hecochain.com",
+                    "http://23.88.68.45/node/heco"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0x7843Bd2aDdE5E54bD6e61C28fA89009240a48C08"
+            },
+            "OEC": {
+                "ENABLED": true,
+                "NAME": "OEC",
+                "NETWORK_ID": "66",
+                "COINGECKO_ID": "okex-chain",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "0.3",
+                "RPCURLS": [
+                    "https://exchainrpc.okex.org",
+                    "https://pub001.hg.network/rpc",
+                    "http://23.88.68.45/node/oec"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0xcBEfF02841370997054AdfF624dC490C8cB20406"
+            },
+            "POLYGON": {
+                "ENABLED": true,
+                "NAME": "Polygon",
+                "NETWORK_ID": "137",
+                "COINGECKO_ID": "polygon-pos",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "46",
+                "RPCURLS": [
+                    "https://polygon-rpc.com/",
+                    "https://speedy-nodes-nyc.moralis.io/9d87192d6452780ef2889cb8/polygon/mainnet",
+                    "http://23.88.68.45/node/poly"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0x216AC39765D920D7f86162Daf9BE1f045f321A8D"
+            },
+            "AVAX": {
+                "ENABLED": true,
+                "NAME": "Avalanche",
+                "NETWORK_ID": "43114",
+                "COINGECKO_ID": "avalanche",
+                "GAS_LIMIT": "500000",
+                "GAS_PRICE": "30",
+                "RPCURLS": [
+                    "https://api.avax.network/ext/bc/C/rpc",
+                    "http://23.88.68.45/node/avax"
+                ],
+                "TREASURY_CONTRACT_ADDRESS": "0x5B1cCb62D2F9c8523abBa89A56432005cef03b99"
+            }
+        }
+    }
+}
