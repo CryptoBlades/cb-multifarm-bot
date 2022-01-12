@@ -8,8 +8,7 @@ const logger = require('./src/helpers/logger')
 
 const startTasks = async () => {
   logger('info', 'Updating ABI...')
-  const { task } = require('./src/tasks/abi-updater')
-  task()
+  require('./src/tasks/abi-updater')()
 
   if (!process.env.PRIVATE_KEY) {
     logger('warn', 'Please set the PRIVATE_KEY in .env')
@@ -22,17 +21,7 @@ const startTasks = async () => {
   }
 
   async.eachSeries(config.supportedChains[process.env.CHAIN_ENV], async chain => {
-    logger('main', `Running price-updater on ${chain}`)
-    const {
-      duration,
-      task
-    } = require('./src/tasks/partner-updater')
-
-    await task(chain)
-
-    setInterval(async () => {
-      await task(chain)
-    }, duration * 1000)
+    require('./src/tasks/partner-updater')(chain)
   })
 }
 

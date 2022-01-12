@@ -55,7 +55,9 @@ const helpers = {
     return web3.eth.accounts.privateKeyToAccount(privateKey).address
   },
 
-  sleep: async ms => await new Promise(resolve => setTimeout(resolve, ms))
+  sleep: async ms => await new Promise(resolve => setTimeout(resolve, ms)),
+
+  getIncreasePercentage: (past, current) => ((Number(current) - Number(past)) / Number(past)) * 100
 }
 
 module.exports = helpers
