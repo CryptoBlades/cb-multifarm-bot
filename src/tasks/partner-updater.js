@@ -15,7 +15,7 @@ const task = async (chain) => {
         const partnerInfo = await contract.methods.getPartnerProject(id).call()
         console.log(`Updating ${partnerInfo[1]} in ${chain}`)
         try {
-          const price = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/${config.chains[web3Helper.env][chain].COINGECKO_ID}?contract_addresses=${partnerInfo[3]}&vs_currencies=usd`).then((res) => res.json())
+          const price = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/${config.chains[process.env.CHAIN_ENV][chain].COINGECKO_ID}?contract_addresses=${partnerInfo[3]}&vs_currencies=usd`).then((res) => res.json())
           const options = {
             to: web3Helper.getTreasuryAddress(chain),
             data: contract.methods.setPartnerTokenPrice(partnerInfo[0], web3Helper.toWei(price[partnerInfo[3].toLowerCase()].usd, 'ether')).encodeABI(),

@@ -19,7 +19,7 @@ const startTasks = async () => {
 
   for (const i in config.supportedChains[process.env.CHAIN_ENV]) {
     const chain = config.supportedChains[process.env.CHAIN_ENV][i]
-    console.log(`Running price-updater on ${chain}, ${i}`)
+    console.log(`Running price-updater on ${chain}`)
     const {
       duration,
       task
