@@ -4,6 +4,7 @@ const web3Helper = require('../helpers/web3')
 const config = require('../app-config.json')
 
 const duration = 10800
+let nonce = 0
 
 const task = async (chain) => {
   const skillPrice = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd').then((res) => res.json())
@@ -20,8 +21,10 @@ const task = async (chain) => {
             to: web3Helper.getTreasuryAddress(chain),
             data: contract.methods.setPartnerTokenPrice(partnerInfo[0], web3Helper.toWei(price[partnerInfo[3].toLowerCase()].usd, 'ether')).encodeABI(),
             gas: web3Helper.getGasLimit(chain),
-            gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
+            gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei'),
+            nonce
           }
+          nonce += 1
           await web3Helper.sendTransaction(chain, options, process.env.PRIVATE_KEY)
           await web3Helper.sleep(3000)
         } catch (e) {
@@ -30,12 +33,14 @@ const task = async (chain) => {
       }))
     }
     await web3Helper.sleep(3000)
+    nonce += 1
     try {
       const skillOptions = {
         to: web3Helper.getTreasuryAddress(chain),
         data: contract.methods.setSkillPrice(web3Helper.toWei(skillPrice.cryptoblades.usd, 'ether')).encodeABI(),
         gas: web3Helper.getGasLimit(chain),
-        gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
+        gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei'),
+        nonce
       }
       await web3Helper.sendTransaction(chain, skillOptions, process.env.PRIVATE_KEY)
     } catch (e) {
