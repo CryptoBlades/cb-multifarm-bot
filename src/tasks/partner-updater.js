@@ -5,7 +5,7 @@ const web3Helper = require('../helpers/web3')
 const logger = require('../helpers/logger')
 const config = require('../app-config.json')
 
-const duration = 10 // 10800
+const duration = 10800
 let currentSkillPrice = 0
 
 const task = async (chain) => {
