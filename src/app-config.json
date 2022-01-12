@@ -84,7 +84,7 @@
                 "NETWORK_ID": "97",
                 "COINGECKO_ID": "binance-smart-chain",
                 "GAS_LIMIT": "500000",
-                "GAS_PRICE": "5.3",
+                "GAS_PRICE": "53",
                 "RPCURLS": [
                     "https://data-seed-prebsc-1-s1.binance.org:8545/",
                     "https://data-seed-prebsc-2-s1.binance.org:8545/",
