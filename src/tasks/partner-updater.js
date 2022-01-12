@@ -33,7 +33,7 @@ const task = async (chain) => {
     try {
       const skillOptions = {
         to: web3Helper.getTreasuryAddress(chain),
-        data: contract.methods.setSkillPrice(web3Helper.toEther(skillPrice.cryptoblades.usd)).encodeABI(),
+        data: contract.methods.setSkillPrice(web3Helper.toWei(skillPrice.cryptoblades.usd, 'ether')).encodeABI(),
         gas: web3Helper.getGasLimit(chain),
         gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
       }
