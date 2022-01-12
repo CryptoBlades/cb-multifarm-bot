@@ -13,6 +13,7 @@ const task = async (chain) => {
     if (partnerIds.length > 0) {
       await Promise.all(partnerIds.map(async id => {
         const partnerInfo = await contract.methods.getPartnerProject(id).call()
+        console.log(partnerInfo)
         console.log(`Updating ${partnerInfo[1]} in ${chain}`)
         try {
           const price = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/${config.chains[process.env.CHAIN_ENV][chain].COINGECKO_ID}?contract_addresses=${partnerInfo[3]}&vs_currencies=usd`).then((res) => res.json())
