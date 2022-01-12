@@ -14,7 +14,6 @@ const task = async (chain) => {
     if (partnerIds.length > 0) {
       await Promise.all(partnerIds.map(async id => {
         const partnerInfo = await contract.methods.getPartnerProject(id).call()
-        console.log(`Updating ${partnerInfo[1]} in ${chain}`)
         try {
           nonce += 1
           const price = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/${config.chains[process.env.CHAIN_ENV][chain].COINGECKO_ID}?contract_addresses=${partnerInfo[3]}&vs_currencies=usd`).then((res) => res.json())
@@ -25,12 +24,15 @@ const task = async (chain) => {
             gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei'),
             nonce
           }
+          console.log(`Updating ${partnerInfo[1]} in ${chain}`)
           await web3Helper.sendTransaction(chain, options, process.env.PRIVATE_KEY)
+          await web3Helper.sleep(3000)
         } catch (e) {
           console.log(`Error updating ${partnerInfo[1]}. Reason: ${e.message}`)
         }
       }))
     }
+    await web3Helper.sleep(3000)
     try {
       nonce += 1
       const skillOptions = {
@@ -40,6 +42,7 @@ const task = async (chain) => {
         gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei'),
         nonce
       }
+      console.log(`Updating SKILL price in ${chain}`)
       await web3Helper.sendTransaction(chain, skillOptions, process.env.PRIVATE_KEY)
     } catch (e) {
       console.log(`Error updating SKILL price in ${chain}. Reason: ${e.message}`)
