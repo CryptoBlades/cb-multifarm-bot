@@ -15,8 +15,11 @@
     "eslint-plugin-promise": "^5.2.0"
   },
   "dependencies": {
+    "async": "^3.2.3",
     "axios": "^0.24.0",
+    "cli-color": "^2.0.1",
     "dotenv": "^11.0.0",
+    "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
     "remove": "^0.1.5",
     "web3": "^1.6.1",
