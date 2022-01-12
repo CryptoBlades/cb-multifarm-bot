@@ -10,7 +10,7 @@ const config = require('../app-config.json')
 const helpers = {
   getNodes: (chain) => config.chains[process.env.CHAIN_ENV][chain].RPCURLS,
   getRandomNode: (chain) => {
-    return helpers.getNodes()[Math.floor(Math.random() * (helpers.getNodes(chain).length - 0 + 1))]
+    return helpers.getNodes(chain)[Math.floor(Math.random() * (helpers.getNodes(chain).length - 0 + 1))]
   },
   getWeb3: (chain) => {
     return new Web3(helpers.getNodes(chain)[0])
