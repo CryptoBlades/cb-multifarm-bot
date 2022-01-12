@@ -45,6 +45,16 @@ const helpers = {
     return web3.eth.sendSignedTransaction(signedTx.rawTransaction)
   },
 
+  getLastNonce: async (chain, address) => {
+    const web3 = helpers.getWeb3(chain)
+    return web3.eth.getTransactionCount(address)
+  },
+
+  getAddress: (chain, privateKey) => {
+    const web3 = helpers.getWeb3(chain)
+    return web3.eth.accounts.privateKeyToAccount(privateKey).address
+  },
+
   sleep: async ms => await new Promise(resolve => setTimeout(resolve, ms))
 }
 
