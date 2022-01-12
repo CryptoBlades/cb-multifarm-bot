@@ -8,7 +8,7 @@ const {
 const config = require('../app-config.json')
 
 const helpers = {
-  getNodes: (chain) => config.chains[helpers.env][chain].RPCURLS,
+  getNodes: (chain) => config.chains[process.env.CHAIN_ENV][chain].RPCURLS,
   getRandomNode: (chain) => {
     return helpers.getNodes()[Math.floor(Math.random() * (helpers.getNodes(chain).length - 0 + 1))]
   },
@@ -16,7 +16,7 @@ const helpers = {
     return new Web3(helpers.getNodes(chain)[0])
   },
   getDefaultAddress: () => '0x0000000000000000000000000000000000000000',
-  getTreasuryAddress: (chain) => config.chains[helpers.env][chain].TREASURY_CONTRACT_ADDRESS,
+  getTreasuryAddress: (chain) => config.chains[process.env.CHAIN_ENV][chain].TREASURY_CONTRACT_ADDRESS,
 
   treasuryAbiPath: '../abi/Treasury.json',
 
@@ -36,8 +36,8 @@ const helpers = {
   fromWei: (value, unit) => utils.fromWei(BigInt(value).toString(), unit),
   toWei: (value, unit) => utils.toWei(value.toString(), unit),
 
-  getGasLimit: (chain) => config.chains[helpers.env][chain].GAS_LIMIT,
-  getGasPrice: (chain) => config.chains[helpers.env][chain].GAS_PRICE,
+  getGasLimit: (chain) => config.chains[process.env.CHAIN_ENV][chain].GAS_LIMIT,
+  getGasPrice: (chain) => config.chains[process.env.CHAIN_ENV][chain].GAS_PRICE,
 
   sendTransaction: async (options, privateKey) => {
     const web3 = helpers.getWeb3()
