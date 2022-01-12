@@ -4,9 +4,9 @@ const web3Helper = require('../helpers/web3')
 const config = require('../app-config.json')
 
 const duration = 10800
-let nonce = 0
 
 const task = async (chain) => {
+  let nonce = 0
   const skillPrice = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd').then((res) => res.json())
   const { onContract } = web3Helper.web3LoadBalancer(chain)
   await onContract('treasury', async (contract) => {
