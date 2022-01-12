@@ -39,8 +39,8 @@ const helpers = {
   getGasLimit: (chain) => config.chains[process.env.CHAIN_ENV][chain].GAS_LIMIT,
   getGasPrice: (chain) => config.chains[process.env.CHAIN_ENV][chain].GAS_PRICE,
 
-  sendTransaction: async (options, privateKey) => {
-    const web3 = helpers.getWeb3()
+  sendTransaction: async (chain, options, privateKey) => {
+    const web3 = helpers.getWeb3(chain)
     const signedTx = await web3.eth.accounts.signTransaction(options, privateKey)
     return web3.eth.sendSignedTransaction(signedTx.rawTransaction)
   },

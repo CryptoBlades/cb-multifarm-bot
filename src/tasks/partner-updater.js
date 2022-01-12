@@ -22,7 +22,7 @@ const task = async (chain) => {
             gas: web3Helper.getGasLimit(chain),
             gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
           }
-          await web3Helper.sendTransaction(options, process.env.PRIVATE_KEY)
+          await web3Helper.sendTransaction(chain, options, process.env.PRIVATE_KEY)
           await web3Helper.sleep(3000)
         } catch (e) {
           console.log(`Error updating ${partnerInfo[1]}. Reason: ${e.message}`)
@@ -37,7 +37,7 @@ const task = async (chain) => {
         gas: web3Helper.getGasLimit(chain),
         gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
       }
-      await web3Helper.sendTransaction(skillOptions, process.env.PRIVATE_KEY)
+      await web3Helper.sendTransaction(chain, skillOptions, process.env.PRIVATE_KEY)
     } catch (e) {
       console.log(`Error updating SKILL price in ${chain}. Reason: ${e.message}`)
     }
