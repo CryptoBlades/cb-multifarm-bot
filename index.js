@@ -10,12 +10,14 @@ const config = require('./src/app-config.json')
 
 const logger = require('./src/helpers/logger')
 
+let testing = false
+
+if (argv.test) testing = true
+
 const startTasks = async () => {
-  if (!argv.test) {
+  if (!testing) {
     logger('info', 'Updating ABI...')
     require('./src/tasks/abi-updater')()
-  } else {
-    process.env.CHAIN_ENV = 'testnet'
   }
 
   if (!process.env.PRIVATE_KEY) {
@@ -29,7 +31,7 @@ const startTasks = async () => {
   }
 
   async.eachSeries(config.supportedChains[process.env.CHAIN_ENV], async chain => {
-    require('./src/tasks/partner-updater')(chain, (argv.test))
+    require('./src/tasks/partner-updater')(chain, testing)
   })
 }
 
