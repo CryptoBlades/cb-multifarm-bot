@@ -9,15 +9,15 @@ const duration = 10800
 
 const task = async (chain, test = false) => {
   logger('main', `Running price-updater in ${chain}`)
-  const skillPrice = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd').then((res) => res.json()).catch(() => 0)
+  const skillPrice = await web3Helper.getSkillPrice(chain)
   const { onContract } = web3Helper.web3LoadBalancer(chain)
   await onContract('treasury', async (contract) => {
     try {
-      if (!skillPrice) throw Error(`Error retrieving price from coingecko. ${skillPrice}`)
-      const skillPriceInEther = web3Helper.toWei(skillPrice.cryptoblades.usd, 'ether')
+      if (!skillPrice) throw Error(`Error retrieving price from dex. ${skillPrice}`)
+      const skillPriceInEther = web3Helper.toWei(skillPrice, 'ether')
       const currentSkillPrice = Number(await contract.methods.skillPrice().call())
       const increase = web3Helper.getIncreasePercentage(currentSkillPrice, skillPriceInEther)
-      if (increase > 100) throw Error(`Unusual increase in price. ${increase}%`)
+      if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase > 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
       if (increase === 0) throw Error('No price change detected.')
       const skillOptions = {
         to: web3Helper.getTreasuryAddress(chain),
@@ -44,9 +44,9 @@ const task = async (chain, test = false) => {
         try {
           const price = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/${config.chains[process.env.CHAIN_ENV][chain].COINGECKO_ID}?contract_addresses=${partnerInfo[3]}&vs_currencies=usd`).then((res) => res.json()).catch(() => 0)
           if (!price) throw Error(`Error retrieving price from coingecko. ${price}`)
-          const priceInEther = web3Helper.toWei(price[partnerInfo[3].toLowerCase()].usd, 'ether')
+          const priceInEther = web3Helper.toWei((partnerInfo[2] === 'SKILL' ? Number(skillPrice) : price[partnerInfo[3].toLowerCase()].usd), 'ether')
           const increase = web3Helper.getIncreasePercentage(partnerInfo[6], priceInEther)
-          if (increase > 100) throw Error(`Unusual increase in price. ${increase}%`)
+          if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase > 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
           if (increase === 0) throw Error('No price change detected.')
           const options = {
             to: web3Helper.getTreasuryAddress(chain),

@@ -10,10 +10,6 @@ const config = require('./src/app-config.json')
 
 const logger = require('./src/helpers/logger')
 
-if (argv.test) {
-  process.env.CHAIN_ENV = 'testnet'
-}
-
 const startTasks = async () => {
   if (!argv.test) {
     logger('info', 'Updating ABI...')

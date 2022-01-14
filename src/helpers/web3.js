@@ -17,8 +17,11 @@ const helpers = {
   },
   getDefaultAddress: () => '0x0000000000000000000000000000000000000000',
   getTreasuryAddress: (chain) => config.chains[process.env.CHAIN_ENV][chain].TREASURY_CONTRACT_ADDRESS,
+  getSkillPairAddress: (chain) => config.chains[process.env.CHAIN_ENV][chain].SKILL_PAIR_CONTRACT_ADDRESS,
+  getTokenPairAddress: (chain) => config.chains[process.env.CHAIN_ENV][chain].TOKEN_PAIR_CONTRACT_ADDRESS,
 
   treasuryAbiPath: '../abi/Treasury.json',
+  swapAbiPath: '../abi/Swap.json',
 
   web3LoadBalancer: (chain) => {
     const contractsServices = createWeb3ContractsServices(helpers.getNodes(chain),
@@ -57,7 +60,36 @@ const helpers = {
 
   sleep: async ms => await new Promise(resolve => setTimeout(resolve, ms)),
 
-  getIncreasePercentage: (past, current) => ((Number(current) - Number(past)) / Number(past)) * 100
+  getIncreasePercentage: (past, current) => ((Number(current) - Number(past)) / Number(past)) * 100,
+
+  getTokenPrice: async (chain) => {
+    const web3 = helpers.getWeb3(chain)
+    const contract = new web3.eth.Contract(require(helpers.swapAbiPath), helpers.getTokenPairAddress(chain))
+    const reserves = await contract.methods.getReserves().call()
+    let price = reserves[1] / reserves[0]
+    if (chain === 'OEC') price = reserves[0] / reserves[1]
+    if (chain === 'POLYGON' || chain === 'AVAX') {
+      price *= 1000000000000
+    }
+    return price
+  },
+
+  getSkillPrice: async (chain) => {
+    const web3 = helpers.getWeb3(chain)
+    const contract = new web3.eth.Contract(require(helpers.swapAbiPath), helpers.getSkillPairAddress(chain))
+    const reserves = await contract.methods.getReserves().call()
+    const tokenPrice = await helpers.getTokenPrice(chain)
+    let price = reserves[1] / reserves[0]
+    if (chain === 'OEC' || chain === 'POLYGON') price = reserves[0] / reserves[1]
+
+    if (chain === 'AVAX') {
+      price *= 1000000000000
+    }
+    if (chain === 'POLYGON' || chain === 'BSC') {
+      price *= tokenPrice
+    }
+    return price
+  }
 }
 
 module.exports = helpers
