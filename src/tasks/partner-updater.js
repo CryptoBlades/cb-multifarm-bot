@@ -17,7 +17,7 @@ const task = async (chain, test = false) => {
       const skillPriceInEther = web3Helper.toWei(skillPrice, 'ether')
       const currentSkillPrice = Number(await contract.methods.skillPrice().call())
       const increase = web3Helper.getIncreasePercentage(currentSkillPrice, skillPriceInEther)
-      if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase > 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
+      if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase >= 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
       if (increase === 0) throw Error('No price change detected.')
       const skillOptions = {
         to: web3Helper.getTreasuryAddress(chain),
@@ -46,7 +46,7 @@ const task = async (chain, test = false) => {
           if (!price) throw Error(`Error retrieving price from coingecko. ${price}`)
           const priceInEther = web3Helper.toWei((partnerInfo[2] === 'SKILL' ? Number(skillPrice) : price[partnerInfo[3].toLowerCase()].usd), 'ether')
           const increase = web3Helper.getIncreasePercentage(partnerInfo[6], priceInEther)
-          if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase > 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
+          if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase >= 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
           if (increase === 0) throw Error('No price change detected.')
           const options = {
             to: web3Helper.getTreasuryAddress(chain),
