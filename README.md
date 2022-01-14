@@ -11,5 +11,5 @@
 
 ## Run
 
-- `npm start` - To run in production
-- `npm run test` - To run tests
+- `npm start` - To run the bot
+- `npm run test` - To run the bot in test mode
