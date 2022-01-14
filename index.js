@@ -1,14 +1,22 @@
 const async = require('async')
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
 
 require('dotenv').config()
+
+const argv = yargs(hideBin(process.argv)).argv
 
 const config = require('./src/app-config.json')
 
 const logger = require('./src/helpers/logger')
 
 const startTasks = async () => {
-  logger('info', 'Updating ABI...')
-  require('./src/tasks/abi-updater')()
+  if (!argv.test) {
+    logger('info', 'Updating ABI...')
+    require('./src/tasks/abi-updater')()
+  } else {
+    process.env.CHAIN_ENV = 'testnet'
+  }
 
   if (!process.env.PRIVATE_KEY) {
     logger('warn', 'Please set the PRIVATE_KEY in .env')
@@ -21,7 +29,7 @@ const startTasks = async () => {
   }
 
   async.eachSeries(config.supportedChains[process.env.CHAIN_ENV], async chain => {
-    require('./src/tasks/partner-updater')(chain)
+    require('./src/tasks/partner-updater')(chain, (argv.test))
   })
 }
 

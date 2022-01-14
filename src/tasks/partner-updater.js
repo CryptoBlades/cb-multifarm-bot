@@ -6,9 +6,8 @@ const logger = require('../helpers/logger')
 const config = require('../app-config.json')
 
 const duration = 10800
-let currentSkillPrice = 0
 
-const task = async (chain) => {
+const task = async (chain, test = false) => {
   logger('main', `Running price-updater in ${chain}`)
   const skillPrice = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cryptoblades&vs_currencies=usd').then((res) => res.json()).catch(() => 0)
   const { onContract } = web3Helper.web3LoadBalancer(chain)
@@ -16,12 +15,10 @@ const task = async (chain) => {
     try {
       if (!skillPrice) throw Error(`Error retrieving price from coingecko. ${skillPrice}`)
       const skillPriceInEther = web3Helper.toWei(skillPrice.cryptoblades.usd, 'ether')
-      if (currentSkillPrice) {
-        const increase = web3Helper.getIncreasePercentage(currentSkillPrice, skillPriceInEther)
-        if (increase > 100) throw Error(`Unusual increase in price. ${increase}%`)
-        if (increase === 0) throw Error('No price change detected.')
-      }
-      currentSkillPrice = skillPriceInEther
+      const currentSkillPrice = Number(await contract.methods.skillPrice().call())
+      const increase = web3Helper.getIncreasePercentage(currentSkillPrice, skillPriceInEther)
+      if (increase > 100) throw Error(`Unusual increase in price. ${increase}%`)
+      if (increase === 0) throw Error('No price change detected.')
       const skillOptions = {
         to: web3Helper.getTreasuryAddress(chain),
         data: contract.methods.setSkillPrice(skillPriceInEther).encodeABI(),
@@ -29,8 +26,12 @@ const task = async (chain) => {
         gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
       }
       logger('info', `Updating price for SKILL in ${chain}`)
-      const tx = await web3Helper.sendTransaction(chain, skillOptions, process.env.PRIVATE_KEY)
-      logger('success', `SKILL price updated in ${chain}. TX: ${tx.transactionHash}`)
+      if (!test) {
+        const tx = await web3Helper.sendTransaction(chain, skillOptions, process.env.PRIVATE_KEY)
+        logger('success', `SKILL price updated in ${chain}. TX: ${tx.transactionHash}`)
+      } else {
+        logger('success', `SKILL price updated in ${chain}. Price: ${skillPriceInEther}`)
+      }
     } catch (e) {
       if (e.message === 'No price change detected.') logger('warn', `Skipped updating SKILL price. Reason: ${e.message}`)
       else logger('error', `Error updating SKILL price. Reason: ${e.message}`)
@@ -54,9 +55,13 @@ const task = async (chain) => {
             gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
           }
           logger('info', `Updating price for ${partnerInfo[1]} in ${chain}`)
-          const tx = await web3Helper.sendTransaction(chain, options, process.env.PRIVATE_KEY)
-          logger('success', `${partnerInfo[1]} price updated in ${chain}. TX: ${tx.transactionHash}`)
-          await web3Helper.sleep(3000)
+          if (!test) {
+            const tx = await web3Helper.sendTransaction(chain, options, process.env.PRIVATE_KEY)
+            logger('success', `${partnerInfo[1]} price updated in ${chain}. TX: ${tx.transactionHash}`)
+            await web3Helper.sleep(3000)
+          } else {
+            logger('success', `${partnerInfo[1]} price updated in ${chain}. Price: ${priceInEther}`)
+          }
         } catch (e) {
           if (e.message === 'No price change detected.') logger('warn', `Skipped updating ${partnerInfo[1]} price. Reason: ${e.message}`)
           else logger('error', `Error updating ${partnerInfo[1]} price. Reason: ${e.message}`)

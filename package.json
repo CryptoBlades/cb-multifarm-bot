@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node ."
+    "start": "node .",    
+    "test": "node . --test"
   },
   "author": "eD3ath",
   "license": "ISC",
