@@ -68,7 +68,7 @@ const helpers = {
     const reserves = await contract.methods.getReserves().call()
     let price = reserves[1] / reserves[0]
     if (chain === 'OEC') price = reserves[0] / reserves[1]
-    if (chain === 'POLYGON' || chain === 'AVAX') {
+    if (chain === 'POLY' || chain === 'AVAX') {
       price *= 1000000000000
     }
     return price
@@ -80,15 +80,31 @@ const helpers = {
     const reserves = await contract.methods.getReserves().call()
     const tokenPrice = await helpers.getTokenPrice(chain)
     let price = reserves[1] / reserves[0]
-    if (chain === 'OEC' || chain === 'POLYGON') price = reserves[0] / reserves[1]
+    if (chain === 'OEC' || chain === 'POLY') price = reserves[0] / reserves[1]
 
     if (chain === 'AVAX') {
       price *= 1000000000000
     }
-    if (chain === 'POLYGON' || chain === 'BSC') {
+    if (chain === 'POLY' || chain === 'BSC') {
       price *= tokenPrice
     }
     return price
+  },
+
+  getBalance: async (chain, address) => {
+    const web3 = helpers.getWeb3(chain)
+    return web3.eth.getBalance(address)
+  },
+
+  gasName: (chain) => {
+    switch (chain) {
+      case 'BSC': return 'BNB'
+      case 'HECO': return 'HT'
+      case 'OEC': return 'OKT'
+      case 'POLY': return 'MATIC'
+      case 'AVAX': return 'AVAX'
+      default: return 'BNB'
+    }
   }
 }
 

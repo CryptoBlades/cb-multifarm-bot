@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node .",    
+    "start": "node .",
     "test": "node . --test"
   },
   "author": "eD3ath",
@@ -19,6 +19,7 @@
     "async": "^3.2.3",
     "axios": "^0.24.0",
     "cli-color": "^2.0.1",
+    "discord.js": "^13.6.0",
     "dotenv": "^11.0.0",
     "moment": "^2.29.1",
     "node-fetch": "^2.6.1",

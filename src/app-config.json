@@ -4,7 +4,7 @@
             "BSC",
             "HECO",
             "OEC",
-            "POLYGON",
+            "POLY",
             "AVAX"
         ],
         "testnet": [
@@ -58,7 +58,7 @@
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0x2d9cdad4b89d91e6a44ec1c8b227b0c2b0d4e2cf",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0xa75bd9f086bbc1168b01fd5e750986b5170c2b26"
             },
-            "POLYGON": {
+            "POLY": {
                 "ENABLED": true,
                 "NAME": "Polygon",
                 "NETWORK_ID": "137",
