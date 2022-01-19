@@ -25,6 +25,7 @@
                     "https://bsc-dataseed1.defibit.io/",
                     "https://bsc-dataseed1.ninicoin.io/"
                 ],
+                "GAS_ORACLE_URL": "https://api.bscscan.com/api?module=gastracker&action=gasoracle",
                 "TREASURY_CONTRACT_ADDRESS": "0x812Fa2f7d89e5d837450702bd51120920dccaA99",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0x0deb588c1ec6f1d9f348126d401f05c4c7b7a80c",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0x58f876857a02d6762e0101bb5c46a8c1ed44dc16"
@@ -39,6 +40,7 @@
                 "RPCURLS": [
                     "https://http-mainnet.hecochain.com"
                 ],
+                "GAS_ORACLE_URL": "https://api.hecoinfo.com/api?module=gastracker&action=gasoracle",
                 "TREASURY_CONTRACT_ADDRESS": "0x7843Bd2aDdE5E54bD6e61C28fA89009240a48C08",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0x7c9739ecD7882157b1C526a832FfD5A50860078d",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0x3289250099cF4cF9e59Fd728a93F36594C1369f0"
@@ -54,6 +56,7 @@
                     "https://exchainrpc.okex.org",
                     "https://pub001.hg.network/rpc"
                 ],
+                "GAS_ORACLE_URL": "",
                 "TREASURY_CONTRACT_ADDRESS": "0xcBEfF02841370997054AdfF624dC490C8cB20406",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0x2d9cdad4b89d91e6a44ec1c8b227b0c2b0d4e2cf",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0xa75bd9f086bbc1168b01fd5e750986b5170c2b26"
@@ -68,6 +71,7 @@
                 "RPCURLS": [
                     "https://polygon-rpc.com/"
                 ],
+                "GAS_ORACLE_URL": "https://api.polygonscan.com/api?module=gastracker&action=gasoracle",
                 "TREASURY_CONTRACT_ADDRESS": "0x216AC39765D920D7f86162Daf9BE1f045f321A8D",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0x42ba6f3aF9d8A2A30F5e55362c45e7121a932b77",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0x65d43b64e3b31965cd5ea367d4c2b94c03084797"
@@ -82,6 +86,7 @@
                 "RPCURLS": [
                     "https://api.avax.network/ext/bc/C/rpc"
                 ],
+                "GAS_ORACLE_URL": "https://api.snowtrace.io/api?module=gastracker&action=gasoracle",
                 "TREASURY_CONTRACT_ADDRESS": "0x5B1cCb62D2F9c8523abBa89A56432005cef03b99",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0xF52B3Df311182F43202806ee0E72aCB92d777879",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0xe28984e1ee8d431346d32bec9ec800efb643eef4"
@@ -103,6 +108,7 @@
                     "https://data-seed-prebsc-1-s3.binance.org:8545/",
                     "https://data-seed-prebsc-2-s3.binance.org:8545/"
                 ],
+                "GAS_ORACLE_URL": "",
                 "TREASURY_CONTRACT_ADDRESS": "0xe676452f2C650F80C3D282E723112aA67bE617c7"
             }
         }
