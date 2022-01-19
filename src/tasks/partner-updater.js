@@ -12,6 +12,7 @@ const task = async (chain, test = false) => {
   const skillPrice = await web3Helper.getSkillPrice(chain)
   const { onContract } = web3Helper.web3LoadBalancer(chain)
   await onContract('treasury', async (contract) => {
+    const gasPrice = await web3Helper.getProposedGasPrice(chain)
     try {
       if (!skillPrice) throw Error(`Error retrieving price from dex. ${skillPrice}`)
       const skillPriceInEther = web3Helper.toWei(skillPrice, 'ether')
@@ -23,7 +24,7 @@ const task = async (chain, test = false) => {
         to: web3Helper.getTreasuryAddress(chain),
         data: contract.methods.setSkillPrice(skillPriceInEther).encodeABI(),
         gas: web3Helper.getGasLimit(chain),
-        gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
+        gasPrice: web3Helper.toWei(gasPrice, 'gwei')
       }
       logger('info', `Updating price for SKILL on ${chain}`)
       if (!test) {
@@ -53,7 +54,7 @@ const task = async (chain, test = false) => {
             to: web3Helper.getTreasuryAddress(chain),
             data: contract.methods.setPartnerTokenPrice(partnerInfo[0], priceInEther).encodeABI(),
             gas: web3Helper.getGasLimit(chain),
-            gasPrice: web3Helper.toWei(web3Helper.getGasPrice(chain), 'gwei')
+            gasPrice: web3Helper.toWei(gasPrice, 'gwei')
           }
           logger('info', `Updating price for ${partnerInfo[1]} on ${chain}`)
           if (!test) {

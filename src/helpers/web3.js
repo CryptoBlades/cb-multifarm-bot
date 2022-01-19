@@ -1,5 +1,7 @@
 const Web3 = require('web3')
 const utils = require('web3-utils')
+const fetch = require('node-fetch')
+
 const {
   createWeb3ContractsServices,
   createLoadBalancedContractsService
@@ -105,6 +107,14 @@ const helpers = {
       case 'AVAX': return 'AVAX'
       default: return 'BNB'
     }
+  },
+
+  getProposedGasPrice: async (chain) => {
+    const oracleUrl = config.chains[process.env.CHAIN_ENV][chain].GAS_ORACLE_URL
+    if (!oracleUrl) return helpers.getGasPrice(chain)
+    const result = await fetch(oracleUrl).then((res) => res.json())
+    if (result.status === '0') return helpers.getGasPrice(chain)
+    return result.result.ProposeGasPrice
   }
 }
 
