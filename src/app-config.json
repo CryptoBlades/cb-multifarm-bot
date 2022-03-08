@@ -18,7 +18,7 @@
                 "NAME": "BSC",
                 "NETWORK_ID": "56",
                 "COINGECKO_ID": "binance-smart-chain",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "5.3",
                 "RPCURLS": [
                     "https://bsc-dataseed.binance.org/",
@@ -35,7 +35,7 @@
                 "NAME": "HECO",
                 "NETWORK_ID": "128",
                 "COINGECKO_ID": "huobi-token",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "3",
                 "RPCURLS": [
                     "https://http-mainnet.hecochain.com"
@@ -50,7 +50,7 @@
                 "NAME": "OEC",
                 "NETWORK_ID": "66",
                 "COINGECKO_ID": "okex-chain",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "0.3",
                 "RPCURLS": [
                     "https://exchainrpc.okex.org",
@@ -66,7 +66,7 @@
                 "NAME": "Polygon",
                 "NETWORK_ID": "137",
                 "COINGECKO_ID": "polygon-pos",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "46",
                 "RPCURLS": [
                     "https://polygon-rpc.com/"
@@ -81,7 +81,7 @@
                 "NAME": "Avalanche",
                 "NETWORK_ID": "43114",
                 "COINGECKO_ID": "avalanche",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "30",
                 "RPCURLS": [
                     "https://api.avax.network/ext/bc/C/rpc"
@@ -98,7 +98,7 @@
                 "NAME": "BSC Testnet",
                 "NETWORK_ID": "97",
                 "COINGECKO_ID": "binance-smart-chain",
-                "GAS_LIMIT": "500000",
+                "GAS_LIMIT": "1000000",
                 "GAS_PRICE": "53",
                 "RPCURLS": [
                     "https://data-seed-prebsc-1-s1.binance.org:8545/",
