@@ -93,6 +93,15 @@ const helpers = {
     return price
   },
 
+  getOtherPrice: async (chain, pairAddress) => {
+    const web3 = helpers.getWeb3(chain)
+    const contract = new web3.eth.Contract(require(helpers.swapAbiPath), pairAddress)
+    const reserves = await contract.methods.getReserves().call()
+    const tokenPrice = await helpers.getTokenPrice(chain)
+    const price = reserves[0] / reserves[1]
+    return price * tokenPrice
+  },
+
   getBalance: async (chain, address) => {
     const web3 = helpers.getWeb3(chain)
     return web3.eth.getBalance(address)
@@ -115,6 +124,10 @@ const helpers = {
     const result = await fetch(oracleUrl).then((res) => res.json())
     if (result.status === '0') return helpers.getGasPrice(chain)
     return result.result.ProposeGasPrice
+  },
+
+  isEmpty: (obj) => {
+    return Object.keys(obj).length === 0
   }
 }
 

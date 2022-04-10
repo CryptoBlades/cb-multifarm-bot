@@ -15,10 +15,8 @@ const web3Helper = require('./src/helpers/web3')
 const discord = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
 
 const startTasks = async () => {
-  if (!argv.test) {
-    logger('info', 'Updating ABI...')
-    require('./src/tasks/abi-updater')()
-  }
+  await require('./src/tasks/abi-updater')()
+  logger('info', 'Updated ABIs...')
 
   if (!process.env.PRIVATE_KEY) {
     logger('warn', 'Please set the PRIVATE_KEY in .env')
