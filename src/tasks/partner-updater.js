@@ -18,6 +18,9 @@ const task = async (chain, test = false) => {
       const skillPriceInEther = web3Helper.toWei(skillPrice, 'ether')
       const currentSkillPrice = Number(await contract.methods.skillPrice().call())
       const increase = web3Helper.getIncreasePercentage(currentSkillPrice, skillPriceInEther)
+      if (chain === 'AURORA') {
+        console.log(skillPriceInEther, currentSkillPrice)
+      }
       if (increase > 100 || increase < -50) throw Error(`Unusual ${(increase >= 0 ? 'increase' : 'decrease')} in price. ${increase}%`)
       if (increase === 0) throw Error('No price change detected.')
       const skillOptions = {
@@ -35,7 +38,7 @@ const task = async (chain, test = false) => {
       }
     } catch (e) {
       if (e.message === 'No price change detected.') logger('warn', `Skipped updating SKILL price. Reason: ${e.message}`)
-      else logger('error', `Error updating SKILL price. Reason: ${e.message}`)
+      else logger('error', `Error updating SKILL price on ${chain}. Reason: ${e.message}`)
     }
 
     const partnerIds = await contract.methods.getActivePartnerProjectsIds().call()

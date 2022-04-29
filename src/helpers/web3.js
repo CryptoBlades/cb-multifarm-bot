@@ -80,14 +80,20 @@ const helpers = {
     const web3 = helpers.getWeb3(chain)
     const contract = new web3.eth.Contract(require(helpers.swapAbiPath), helpers.getSkillPairAddress(chain))
     const reserves = await contract.methods.getReserves().call()
-    const tokenPrice = await helpers.getTokenPrice(chain)
+    let tokenPrice = 0
+    if (chain === 'AURORA') {
+      const result = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=near&vs_currencies=usd').then((res) => res.json())
+      tokenPrice = result.near.usd
+    } else tokenPrice = await helpers.getTokenPrice(chain)
     let price = reserves[1] / reserves[0]
-    if (chain === 'OEC' || chain === 'POLY') price = reserves[0] / reserves[1]
-
+    if (chain === 'OEC' || chain === 'POLY' || chain === 'AURORA') price = reserves[0] / reserves[1]
+    if (chain === 'AURORA') {
+      price /= 1000000
+    }
     if (chain === 'AVAX') {
       price *= 1000000000000
     }
-    if (chain === 'POLY' || chain === 'BSC') {
+    if (chain === 'POLY' || chain === 'BSC' || chain === 'AURORA') {
       price *= tokenPrice
     }
     return price
