@@ -5,7 +5,8 @@
             "HECO",
             "OEC",
             "POLY",
-            "AVAX"
+            "AVAX",
+            "AURORA"
         ],
         "testnet": [
             "BSC"
@@ -90,6 +91,21 @@
                 "TREASURY_CONTRACT_ADDRESS": "0x5B1cCb62D2F9c8523abBa89A56432005cef03b99",
                 "SKILL_PAIR_CONTRACT_ADDRESS": "0xF52B3Df311182F43202806ee0E72aCB92d777879",
                 "TOKEN_PAIR_CONTRACT_ADDRESS": "0xe28984e1ee8d431346d32bec9ec800efb643eef4"
+            },
+            "AURORA": {
+                "ENABLED": true,
+                "NAME": "Aurora ETH",
+                "NETWORK_ID": "0x4e454152",
+                "COINGECKO_ID": "near",
+                "GAS_LIMIT": "1000000",
+                "GAS_PRICE": "30",
+                "RPCURLS": [
+                    "https://mainnet.aurora.dev"
+                ],
+                "GAS_ORACLE_URL": "",
+                "TREASURY_CONTRACT_ADDRESS": "0x483416eB3aFA601B9C6385f63CeC0C82B6aBf1fb",
+                "SKILL_PAIR_CONTRACT_ADDRESS": "0xe8aAF8F8114009D116A0cb9A96B0AC7aBF9A3A99",
+                "TOKEN_PAIR_CONTRACT_ADDRESS": ""
             }
         },
         "testnet": {

@@ -35,7 +35,7 @@ const task = async (chain, test = false) => {
       }
     } catch (e) {
       if (e.message === 'No price change detected.') logger('warn', `Skipped updating SKILL price. Reason: ${e.message}`)
-      else logger('error', `Error updating SKILL price. Reason: ${e.message}`)
+      else logger('error', `Error updating SKILL price on ${chain}. Reason: ${e.message}`)
     }
 
     const partnerIds = await contract.methods.getActivePartnerProjectsIds().call()
